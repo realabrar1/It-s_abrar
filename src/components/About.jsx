@@ -47,6 +47,13 @@ const About = () => {
 
           {/* Horizontal Skills Row (Transparent & Large) */}
           <div className="flex items-center gap-10 mt-8">
+
+            <img 
+              data-aos="zoom-in" data-aos-delay="300"
+              src={javaImage} 
+              alt="Java" 
+              className="w-20 h-20 md:w-24 md:h-24 object-contain hover:scale-110 transition-transform duration-300 cursor-pointer drop-shadow-2xl" 
+            />
             <img 
               data-aos="zoom-in" data-aos-delay="300"
               src={reactImage} 
