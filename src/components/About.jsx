@@ -3,6 +3,8 @@ import stackImage from '../assets/about/image.png';
 import reactImage from '../assets/about/react.png';
 import nodeImage from '../assets/about/node.png';
 import mongoImage from '../assets/about/mongodb.png';
+import mongoImage from '../assets/about/java.png';
+
 
 const About = () => {
   return (
