@@ -6,17 +6,23 @@ import heroVideo from '../assets/hero video/Developer_introduces_self_and_sk…_
 
 const Hero = () => {
   const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-out'
-    });
+  AOS.init({
+    duration: 1000,
+    once: true,
+    easing: 'ease-out',
+  });
+
+  if (videoRef.current) {
+    videoRef.current.muted = true;
+    videoRef.current.play().catch(() => {});
+    setIsMuted(true);
+  }
+}, []);
     // Video does NOT autoplay anymore
-  }, []);
+
 
   const toggleVideo = (e) => {
     e.stopPropagation();
@@ -32,19 +38,27 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-black">
+    <section
+  className="relative w-full h-screen overflow-hidden bg-black"
+  onClick={enableAudio}
+>
       {/* Background Video */}
       <video
-        ref={videoRef}
-        loop
-        muted={isMuted}
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-      >
-        <source src={heroVideo} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
+  ref={videoRef}
+  autoPlay
+  muted={isMuted}
+  playsInline
+  preload="auto"
+  onEnded={() => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+    }
+  }}
+  className="absolute top-0 left-0 w-full h-full object-cover z-0"
+>
+  <source src={heroVideo} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
       {/* Content Container */}
       <div className="absolute inset-0 z-20 px-6 pb-20 md:pb-[8%] md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-end md:justify-between items-start md:items-end text-left w-full">
         
@@ -86,7 +100,7 @@ const Hero = () => {
         </div>
 
         {/* Right Side: Play Video Button */}
-        <div 
+        {/* <div 
           data-aos="zoom-in"
           data-aos-delay="600"
           className="mt-8 md:mt-0 flex flex-row md:flex-col items-center gap-2 md:gap-3 cursor-pointer group self-start md:self-auto"
@@ -110,7 +124,8 @@ const Hero = () => {
           </span>
         </div>
       </div>
-
+      */}
+*/
       {/* Scroll Indicator */}
       <div 
         data-aos="fade-up"
